@@ -2,4 +2,4 @@
 База данных для Пекарни-кондитерской
 
 ## Концептуальная модель
-![image](https://github.com/user-attachments/assets/484aee9f-b638-4dfc-810c-fa48cc5fb119)
+![image](https://github.com/user-attachments/assets/186e56ad-b331-4a34-ac56-1436d21529b6)
