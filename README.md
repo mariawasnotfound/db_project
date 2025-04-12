@@ -16,4 +16,4 @@
 ![описание](https://github.com/user-attachments/assets/8d1f59e7-4af4-481d-bf3d-b3a4de8903c1)
 
 ## Физическая модель
-Создаем таблицы https://github.com/mariawasnotfound/db_project/edit/main/Creation.sql
+Создаем таблицы [Creation.sql](https://github.com/mariawasnotfound/db_project/edit/main/Creation.sql)
