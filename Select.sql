@@ -109,13 +109,39 @@ FULL JOIN Sales s ON p.product_id = s.product
 GROUP BY p.name
 ORDER BY sales_count DESC;
 
--- 13.
+-- 13. Список товаров, которые содержат ингредиент 'Шоколад темный 70%'
+SELECT name
+FROM Products
+WHERE product_id = ANY (
+    SELECT product
+    FROM Compositions
+    WHERE ingredient = ANY (
+        SELECT ingredient_id
+        FROM Ingredients
+        WHERE name = 'Шоколад темный 70%'
+    )
+);
+
+-- 14. Список товаров, цена которых выше всех продуктов из категории "Выпечка" (3)
 SELECT name, price, measure_unit
 FROM Products
-WHERE category = 1
-AND price > ANY (
+WHERE price > ALL (
     SELECT price 
     FROM Products 
-    WHERE category = 2
+    WHERE category = 3 -- Выпечка
 )
-ORDER BY price DESC;
+AND valid_to IS NULL
+ORDER BY price;
+
+-- 15. Список клиентов, сделавших заказ в 2025 году
+SELECT c.first_name, c.last_name, c.phone_number
+FROM Customers c
+WHERE EXISTS (
+    SELECT 1 
+    FROM Orders o 
+    WHERE o.customer = c.customer_id 
+    AND o.date >= '2025-01-01'
+)
+ORDER BY c.last_name;
+
+-- 16.
