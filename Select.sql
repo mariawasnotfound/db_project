@@ -144,4 +144,17 @@ WHERE EXISTS (
 )
 ORDER BY c.last_name;
 
--- 16.
+-- 16. Анализ ежедневной динамики продаж (подсчет выручки за день и сравнение с предыдущим)
+SELECT 
+    date,
+    daily_sales,
+    LAG(daily_sales, 1) OVER (ORDER BY date) AS previous_day_sales,
+    daily_sales - LAG(daily_sales, 1) OVER (ORDER BY date) AS sales_difference
+FROM (
+    SELECT o.date, SUM(p.price * s.amount) AS daily_sales
+    FROM Sales s
+    JOIN Orders o ON s.order_ = o.order_id
+    JOIN Products p ON s.product = p.product_id
+    GROUP BY o.date
+)
+ORDER BY date;
