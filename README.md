@@ -5,7 +5,7 @@
 ![концептуальная_модель](https://github.com/user-attachments/assets/ab781a9c-3abc-43bc-adfb-60a3d3fa6b58)
 
 ## Логическая модель
-![логическая_модель](https://github.com/user-attachments/assets/7acdd260-92d5-41e4-9e43-6d066b31f2f9)
+![логическая_модель_](https://github.com/user-attachments/assets/d81df7fb-3c63-402f-9bab-ec803b95125c)
 
 Описание логической модели:
 
