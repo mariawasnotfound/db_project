@@ -1,11 +1,11 @@
--- 1. Список сотрудников, работающих продавцами, отсортированный по дате принятия на работу
+-- 1. Узнаем список продавцов, отсортированный по дате принятия на работу.
 SELECT emp.first_name, emp.last_name, emp.middle_name, pos.name AS position
 FROM Employees emp
 JOIN Positions pos ON emp.position = pos.position_id
 WHERE pos.name IN ('Продавец', 'Главный продавец')
 ORDER BY emp.hire_date;
 
--- 2. Список сотрудников и количество заказов, выполненных ими, по убыванию 
+-- 2. Узнаем количество заказов, выполненных сотрудниками.
 SELECT emp.first_name, emp.last_name, emp.middle_name, pos.name AS position, COUNT(s.order_) AS orders_count
 FROM Employees emp
 JOIN Positions pos ON emp.position = pos.position_id
@@ -13,7 +13,7 @@ INNER JOIN Sales s ON emp.employee_id = s.seller
 GROUP BY emp.employee_id, pos.position_id
 ORDER BY orders_count DESC;
 
--- 3. Топ-5 самых популярных товаров по количеству продаж
+-- 3. Узнаем топ-5 самых популярных товаров по количеству продаж.
 SELECT prod.name, COUNT(s.product) AS sales_count
 FROM Sales s
 JOIN Products prod ON s.product = prod.product_id
@@ -21,7 +21,7 @@ GROUP BY prod.name
 ORDER BY sales_count DESC
 LIMIT 5;
 
--- 4. Список покупателей, заказавших не менее 3 товаров
+-- 4. Узнаем список покупателей, заказавших не менее 3 товаров.
 SELECT customer_id, first_name, last_name, middle_name
 FROM Customers
 WHERE customer_id IN (
@@ -32,7 +32,7 @@ WHERE customer_id IN (
     HAVING COUNT(s.product) >= 3
 );
 
--- 5. Название самого дешевого продукта
+-- 5. Узнаем название самого дешевого товара.
 SELECT name 
 FROM Products 
 WHERE price = (
@@ -40,7 +40,7 @@ WHERE price = (
     FROM Products
 );
 
--- 6. Состав самого дорогого продукта
+-- 6. Узнаем состав самого дорогого товара.
 SELECT p.name as product, i.name, c.amount, i.measure_unit
 FROM Compositions c
 JOIN Ingredients i ON c.ingredient = i.ingredient_id
@@ -53,7 +53,7 @@ WHERE c.product = (
     LIMIT 1
 );
 
--- 7. Пары актуальных продуктов с одинаковой ценой и из одной категории
+-- 7. Узнаем пары товаров из одной категории с одинаковой (актуальной) ценой.
 SELECT p1.name AS product_1, p2.name AS product_2, p1.price
 FROM Products p1
 JOIN Products p2 ON p1.price = p2.price
@@ -64,7 +64,7 @@ WHERE p1.category = p2.category
   AND p2.valid_from <= CURRENT_DATE AND p2.valid_to IS NULL
 ;
 
--- 8. Средняя цена товара в категории и разница цены товара от средней цены категории (в процентах) по убыванию
+-- 8. Узнаем среднюю цена товара в категории и сравниваем цену каждого товара со средней по его категории в процентах.
 SELECT 
     p.name,
     p.price,
@@ -74,13 +74,13 @@ FROM Products p
 WHERE p.valid_to IS NULL
 ORDER BY difference_percent DESC;
 
--- 9. Список акутальных товаров, которые никогда не покупали
+-- 9. Узнаем список товаров, которые никогда не покупали.
 SELECT p.name
 FROM Products p
 LEFT JOIN Sales s ON p.product_id = s.product
 WHERE s.product IS NULL AND p.valid_to IS NULL;
 
--- 10. Список последних заказов покупателей с товарами
+-- 10. Узнаем список последних заказов покупателей с перечнем товаров.
 SELECT 
     c.first_name, 
     c.last_name, 
@@ -95,21 +95,21 @@ WHERE o.date IS NOT NULL
 GROUP BY c.customer_id, o.order_id, c.first_name, c.last_name, o.date
 ORDER BY c.last_name, date DESC;
 
--- 11. Количество сотрудников на каждой должности по убыванию
+-- 11. Узнаем количество сотрудников на каждой должности.
 SELECT p.name AS position_name, COUNT(e.employee_id) AS employees_count
 FROM Employees e
 RIGHT JOIN Positions p ON e.position = p.position_id
 GROUP BY p.name
 ORDER BY employees_count DESC;
 
--- 12. Количество продаж каждого продукта по убыванию
+-- 12. Узнаем продажи каждого товара.
 SELECT p.name AS product_name, COUNT(s.sale_id) AS sales_count
 FROM Products p
 FULL JOIN Sales s ON p.product_id = s.product
 GROUP BY p.name
 ORDER BY sales_count DESC;
 
--- 13. Список товаров, которые содержат ингредиент 'Шоколад темный 70%'
+-- 13. Узнаем список товаров, содержащих "Шоколад темный 70%".
 SELECT name
 FROM Products
 WHERE product_id = ANY (
@@ -122,7 +122,7 @@ WHERE product_id = ANY (
     )
 );
 
--- 14. Список товаров, цена которых выше всех продуктов из категории "Выпечка" (3)
+-- 14. Узнаем список товаров, цена которых выше всех товаров из категории "Выпечка".
 SELECT name, price, measure_unit
 FROM Products
 WHERE price > ALL (
@@ -133,7 +133,7 @@ WHERE price > ALL (
 AND valid_to IS NULL
 ORDER BY price;
 
--- 15. Список клиентов, сделавших заказ в 2025 году
+-- 15. Узнаем список покупателей, сделавших заказ в 2025 году.
 SELECT c.first_name, c.last_name, c.phone_number
 FROM Customers c
 WHERE EXISTS (
@@ -144,7 +144,7 @@ WHERE EXISTS (
 )
 ORDER BY c.last_name;
 
--- 16. Анализ ежедневной динамики продаж (подсчет выручки за день и сравнение с предыдущим)
+-- 16. Сравниваем выручку каждого дня с предыдущим (ежедневная динамика продаж).
 SELECT 
     date,
     daily_sales,
