@@ -16,4 +16,4 @@
 ![описание](https://github.com/user-attachments/assets/cea3b75c-a829-49d8-9eff-2cf350f2db30)
 
 ## Физическая модель
-Создаем таблицы [Creation.sql](https://github.com/mariawasnotfound/db_project/edit/main/Creation.sql)
+Создаем таблицы [Creation.sql](https://github.com/mariawasnotfound/db_project/edit/main/Creation.sql), заполняем их данными [Filling_tables.sql](https://github.com/mariawasnotfound/db_project/edit/main/Filling_tables.sql). Далее пишем смысловые запросы [Select.sql](https://github.com/mariawasnotfound/db_project/edit/main/Select.sql)
