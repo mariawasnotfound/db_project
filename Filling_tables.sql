@@ -190,7 +190,7 @@ VALUES
 (30, 15, '2025-04-09');
 
 -- Заполнение таблицы (30+) Sales (Продажа товаров)
-INSERT INTO Sales (sale_id, order, product, amount, seller)
+INSERT INTO Sales (sale_id, order_, product, amount, seller)
 VALUES
 (1, 1, 1, 2, 4), (2, 1, 5, 1, 4), 
 (3, 2, 3, 1, 10), (4, 2, 8, 2, 10), 
