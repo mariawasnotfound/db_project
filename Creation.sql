@@ -1,19 +1,3 @@
--- Должности
-CREATE TABLE IF NOT EXISTS Positions (
-    position_id INT PRIMARY KEY,
-    name VARCHAR(200) NOT NULL UNIQUE
-);
-
--- Сотрудники
-CREATE TABLE IF NOT EXISTS Employees (
-    employee_id INT PRIMARY KEY,
-    first_name VARCHAR(200) NOT NULL,
-    last_name VARCHAR(200) NOT NULL,
-    middle_name VARCHAR(200),
-    position INT NOT NULL REFERENCES Positions(position_id),
-    hire_date DATE NOT NULL
-);
-
 -- Покупатели
 CREATE TABLE IF NOT EXISTS Customers (
     customer_id INT PRIMARY KEY,
@@ -24,10 +8,40 @@ CREATE TABLE IF NOT EXISTS Customers (
     email VARCHAR(200)
 );
 
+-- Должности
+CREATE TABLE IF NOT EXISTS Positions (
+    position_id INT PRIMARY KEY,
+    name VARCHAR(200) NOT NULL UNIQUE
+);
+
+-- Ингредиенты
+CREATE TABLE IF NOT EXISTS Ingredients (
+    ingredient_id INT PRIMARY KEY,
+    name VARCHAR(200) NOT NULL unique,
+    measure_unit VARCHAR(20) NOT NULL
+);
+
 -- Категории
 CREATE TABLE IF NOT EXISTS Categories (
     category_id INT PRIMARY KEY,
     name VARCHAR(200) NOT NULL UNIQUE
+);
+
+-- Заказы
+CREATE TABLE IF NOT EXISTS Orders (
+    order_id INT PRIMARY KEY,
+    customer INT NOT NULL REFERENCES Customers(customer_id),
+    date DATE NOT NULL
+);
+
+-- Сотрудники
+CREATE TABLE IF NOT EXISTS Employees (
+    employee_id INT PRIMARY KEY,
+    first_name VARCHAR(200) NOT NULL,
+    last_name VARCHAR(200) NOT NULL,
+    middle_name VARCHAR(200),
+    position INT NOT NULL REFERENCES Positions(position_id),
+    hire_date DATE NOT NULL
 );
 
 -- Продукты
@@ -41,13 +55,6 @@ CREATE TABLE IF NOT EXISTS Products (
     valid_to DATE DEFAULT NULL
 );
 
--- Заказы
-CREATE TABLE IF NOT EXISTS Orders (
-    order_id INT PRIMARY KEY,
-    customer INT NOT NULL REFERENCES Customers(customer_id),
-    date DATE NOT NULL
-);
-
 -- Продажа товара
 CREATE TABLE IF NOT EXISTS Sales (
     sale_id INT PRIMARY KEY,
@@ -55,12 +62,6 @@ CREATE TABLE IF NOT EXISTS Sales (
     product INT NOT NULL REFERENCES Products(product_id),
     amount DECIMAL(10,2) NOT NULL,
     seller INT NOT NULL REFERENCES Employees(employee_id)
-);
-
--- Ингредиенты
-CREATE TABLE IF NOT EXISTS Ingredients (
-    ingredient_id INT PRIMARY KEY,
-    name VARCHAR(200) NOT NULL UNIQUE
 );
 
 -- Состав товара
