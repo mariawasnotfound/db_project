@@ -5,7 +5,7 @@
 ![концептуальная_модель](https://github.com/user-attachments/assets/ab781a9c-3abc-43bc-adfb-60a3d3fa6b58)
 
 ## Логическая модель
-![логическая_модель](https://github.com/user-attachments/assets/1a22ca6b-f5c5-4bf8-93ef-540ff5208d03)
+![логическая_модель](https://github.com/user-attachments/assets/beab0c4a-3ae6-40d5-a700-02c83b0b01c5)
 
 Описание логической модели:
 
@@ -13,7 +13,7 @@
 
 Используется второй тип версионирования (SCD type 2), что позволяет хранить историю изменений в товарах (цена, состав, название), фиксируя начало и конец действия каждой версии. Этот тип хранит полную и неограниченную историю версий, обеспечивает удобный и простой доступ к данным необходимого периода.
 
-![описание](https://github.com/user-attachments/assets/8d1f59e7-4af4-481d-bf3d-b3a4de8903c1)
+![описание](https://github.com/user-attachments/assets/cea3b75c-a829-49d8-9eff-2cf350f2db30)
 
 ## Физическая модель
 Создаем таблицы [Creation.sql](https://github.com/mariawasnotfound/db_project/edit/main/Creation.sql)
