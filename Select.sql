@@ -94,3 +94,28 @@ JOIN Products p ON s.product = p.product_id
 WHERE o.date IS NOT NULL
 GROUP BY c.customer_id, o.order_id, c.first_name, c.last_name, o.date
 ORDER BY c.last_name, date DESC;
+
+-- 11. Количество сотрудников на каждой должности по убыванию
+SELECT p.name AS position_name, COUNT(e.employee_id) AS employees_count
+FROM Employees e
+RIGHT JOIN Positions p ON e.position = p.position_id
+GROUP BY p.name
+ORDER BY employees_count DESC;
+
+-- 12. Количество продаж каждого продукта по убыванию
+SELECT p.name AS product_name, COUNT(s.sale_id) AS sales_count
+FROM Products p
+FULL JOIN Sales s ON p.product_id = s.product
+GROUP BY p.name
+ORDER BY sales_count DESC;
+
+-- 13.
+SELECT name, price, measure_unit
+FROM Products
+WHERE category = 1
+AND price > ANY (
+    SELECT price 
+    FROM Products 
+    WHERE category = 2
+)
+ORDER BY price DESC;
