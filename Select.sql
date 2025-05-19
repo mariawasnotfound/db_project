@@ -21,7 +21,7 @@ GROUP BY prod.name
 ORDER BY sales_count DESC
 LIMIT 5;
 
--- 4. Узнаем список покупателей, заказавших не менее 3 товаров.
+-- 4. Узнаем список покупателей, заказавших не менее 3 различных товаров.
 SELECT customer_id, first_name, last_name, middle_name
 FROM Customers
 WHERE customer_id IN (
@@ -40,7 +40,7 @@ WHERE price = (
     FROM Products
 );
 
--- 6. Узнаем состав самого дорогого товара.
+-- 6. Узнаем состав самого дорогого товара из категории 'Кондитерские изделия'.
 SELECT p.name as product, i.name, c.amount, i.measure_unit
 FROM Compositions c
 JOIN Ingredients i ON c.ingredient = i.ingredient_id
